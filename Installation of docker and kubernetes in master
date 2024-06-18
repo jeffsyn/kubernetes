@@ -1,0 +1,606 @@
+jeff_phoenix_syn@kubernetes-master:~$ sudo su -
+root@kubernetes-master:~# apt-get update
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease [128 kB]
+Get:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease [128 kB]
+Get:4 http://security.ubuntu.com/ubuntu focal-security InRelease [128 kB]
+Get:5 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:6 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:7 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:8 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:9 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:10 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:11 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [3359 kB]
+Get:12 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [1194 kB]
+Get:13 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [287 kB]
+Get:14 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [25.7 kB]
+Get:15 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [26.2 kB]
+Get:16 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7880 B]
+Get:17 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [620 B]
+Get:18 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.7 kB]
+Get:19 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:20 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:21 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:22 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [25.0 kB]
+Get:23 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.3 kB]
+Get:24 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [880 B]
+Get:25 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:26 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [2984 kB]
+Get:27 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [966 kB]
+Get:28 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [204 kB]
+Get:29 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [19.2 kB]
+Get:30 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [24.0 kB]
+Get:31 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5904 B]
+Get:32 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [548 B]
+Fetched 23.9 MB in 5s (5153 kB/s)                              
+Reading package lists... Done
+root@kubernetes-master:~# for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'docker.io' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'docker-doc' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'docker-compose' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'docker-compose-v2' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package podman-docker
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'containerd' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'runc' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@kubernetes-master:~# sudo apt-get update
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease
+Reading package lists... Done                        
+root@kubernetes-master:~# sudo apt-get install ca-certificates curl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.20.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.68.0-1ubuntu2.22).
+curl set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@kubernetes-master:~# sudo install -m 0755 -d /etc/apt/keyrings
+root@kubernetes-master:~# sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+root@kubernetes-master:~# sudo chmod a+r /etc/apt/keyrings/docker.asc
+root@kubernetes-master:~# # Add the repository to Apt sources:
+root@kubernetes-master:~# echo \
+>   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+>   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+>   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+root@kubernetes-master:~# sudo apt-get update
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease           
+Hit:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease         
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease                                        
+Get:5 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]                                
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [44.6 kB]
+Fetched 102 kB in 1s (103 kB/s)     
+Reading package lists... Done
+root@kubernetes-master:~# sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-pluginReading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  docker-ce-rootless-extras pigz slirp4netns
+Suggested packages:
+  aufs-tools cgroupfs-mount | cgroup-lite
+The following NEW packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin pigz slirp4netns
+0 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.
+Need to get 121 MB of archives.
+After this operation, 434 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/universe amd64 pigz amd64 2.4-1 [57.4 kB]
+Get:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/universe amd64 slirp4netns amd64 0.4.3-1 [74.3 kB]
+Get:3 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.33-1 [30.0 MB]
+Get:4 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-buildx-plugin amd64 0.14.1-1~ubuntu.20.04~focal [29.6 MB]
+Get:5 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-cli amd64 5:26.1.4-1~ubuntu.20.04~focal [14.6 MB]
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce amd64 5:26.1.4-1~ubuntu.20.04~focal [25.3 MB]
+Get:7 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-rootless-extras amd64 5:26.1.4-1~ubuntu.20.04~focal [9327 kB]
+Get:8 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-compose-plugin amd64 2.27.1-1~ubuntu.20.04~focal [12.5 MB]
+Fetched 121 MB in 2s (71.4 MB/s)                
+Selecting previously unselected package pigz.
+(Reading database ... 62143 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.4-1_amd64.deb ...
+Unpacking pigz (2.4-1) ...
+Selecting previously unselected package containerd.io.
+Preparing to unpack .../1-containerd.io_1.6.33-1_amd64.deb ...
+Unpacking containerd.io (1.6.33-1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../2-docker-buildx-plugin_0.14.1-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-buildx-plugin (0.14.1-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../3-docker-ce-cli_5%3a26.1.4-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce-cli (5:26.1.4-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../4-docker-ce_5%3a26.1.4-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce (5:26.1.4-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../5-docker-ce-rootless-extras_5%3a26.1.4-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:26.1.4-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../6-docker-compose-plugin_2.27.1-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-compose-plugin (2.27.1-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../7-slirp4netns_0.4.3-1_amd64.deb ...
+Unpacking slirp4netns (0.4.3-1) ...
+Setting up slirp4netns (0.4.3-1) ...
+Setting up docker-buildx-plugin (0.14.1-1~ubuntu.20.04~focal) ...
+Setting up containerd.io (1.6.33-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up docker-compose-plugin (2.27.1-1~ubuntu.20.04~focal) ...
+Setting up docker-ce-cli (5:26.1.4-1~ubuntu.20.04~focal) ...
+Setting up pigz (2.4-1) ...
+Setting up docker-ce-rootless-extras (5:26.1.4-1~ubuntu.20.04~focal) ...
+Setting up docker-ce (5:26.1.4-1~ubuntu.20.04~focal) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for systemd (245.4-4ubuntu3.23) ...
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete 
+Digest: sha256:d1b0b5888fbb59111dbf2b3ed698489c41046cb9d6d61743e37ef8d9f3dda06f
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo usermod -aG docker ubuntu
+root@kubernetes-master:~# sudo mkdir -p /etc/containerd
+root@kubernetes-master:~# sudo containerd config default | sudo tee /etc/containerd/config.toml
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    drain_exec_sync_io_timeout = "0s"
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_deprecation_warnings = []
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "registry.k8s.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    mount_options = []
+    root_path = ""
+    sync_remove = false
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+root@kubernetes-master:~# sudo vim /etc/containerd/config.toml
+root@kubernetes-master:~# sudo systemctl restart containerd
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# apt-get update && apt-get install -y apt-transport-https curl
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease           
+Hit:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease         
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease                                        
+Hit:5 https://download.docker.com/linux/ubuntu focal InRelease                                          
+Reading package lists... Done                       
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+curl is already the newest version (7.68.0-1ubuntu2.22).
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1704 B of archives.
+After this operation, 162 kB of additional disk space will be used.
+Get:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.10 [1704 B]
+Fetched 1704 B in 0s (93.2 kB/s)              
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 62398 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.10_all.deb ...
+Unpacking apt-transport-https (2.0.10) ...
+Setting up apt-transport-https (2.0.10) ...
+root@kubernetes-master:~# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+OK
+root@kubernetes-master:~# cat << EOF >/etc/apt/sources.list.d/kubernetes.list
+> deb https://apt.kubernetes.io/ kubernetes-xenial main
+> EOF
+root@kubernetes-master:~# apt-get update
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease                                                
+Hit:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease                                              
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease                                                             
+Hit:6 https://download.docker.com/linux/ubuntu focal InRelease                                                               
+Ign:5 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Err:7 https://packages.cloud.google.com/apt kubernetes-xenial Release
+  404  Not Found [IP: 142.251.183.138 443]
+Reading package lists... Done
+E: The repository 'https://apt.kubernetes.io kubernetes-xenial Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.20.04.1).
+curl is already the newest version (7.68.0-1ubuntu2.22).
+gpg is already the newest version (2.2.19-3ubuntu2.2).
+gpg set to manually installed.
+apt-transport-https is already the newest version (2.0.10).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo mkdir -p -m 755 /etc/apt/keyrings
+root@kubernetes-master:~# 
+root@kubernetes-master:~# curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+root@kubernetes-master:~# 
+root@kubernetes-master:~# echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo apt-get update
+Hit:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-updates InRelease                                                
+Hit:3 http://us-central1.gce.archive.ubuntu.com/ubuntu focal-backports InRelease                                              
+Hit:5 https://download.docker.com/linux/ubuntu focal InRelease                                                                
+Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1186 B]
+Hit:6 http://security.ubuntu.com/ubuntu focal-security InRelease                                
+Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [5226 B]
+Fetched 6412 B in 1s (6473 B/s)
+Reading package lists... Done
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo apt-get install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.
+Need to get 93.8 MB of archives.
+After this operation, 343 MB of additional disk space will be used.
+Get:1 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:2 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:4 http://us-central1.gce.archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.2-1.1 [10.4 MB]
+Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.2-1.1 [10.8 MB]
+Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.2-1.1 [18.1 MB]
+Fetched 93.8 MB in 1s (83.1 MB/s) 
+Selecting previously unselected package conntrack.
+(Reading database ... 62402 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.30.0-1.1_amd64.deb ...
+Unpacking cri-tools (1.30.0-1.1) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../3-kubeadm_1.30.2-1.1_amd64.deb ...
+Unpacking kubeadm (1.30.2-1.1) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../4-kubectl_1.30.2-1.1_amd64.deb ...
+Unpacking kubectl (1.30.2-1.1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../5-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+Unpacking kubernetes-cni (1.4.0-1.1) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../6-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../7-kubelet_1.30.2-1.1_amd64.deb ...
+Unpacking kubelet (1.30.2-1.1) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.30.2-1.1) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.30.0-1.1) ...
+Setting up kubernetes-cni (1.4.0-1.1) ...
+Setting up kubeadm (1.30.2-1.1) ...
+Setting up kubelet (1.30.2-1.1) ...
+Processing triggers for man-db (2.9.1-1) ...
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# sudo systemctl enable --now kubelet
+root@kubernetes-master:~# 
+root@kubernetes-master:~# kubectl version --client
+Client Version: v1.30.2
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"30", GitVersion:"v1.30.2", GitCommit:"39683505b630ff2121012f3c5b16215a1449d5ed", GitTreeState:"clean", BuildDate:"2024-06-11T20:27:59Z", GoVersion:"go1.22.4", Compiler:"gc", Platform:"linux/amd64"}
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
+root@kubernetes-master:~# 
